@@ -1,0 +1,110 @@
+{% extends 'product/base.html' %} {% load static %} {% block content %}
+
+<!-- Page Header -->
+<div
+  class="text-center py-5"
+  style="background: linear-gradient(135deg, #667eea, #764ba2); color: white"
+>
+  <h1 class="fw-bold display-5">Payment Gateway</h1>
+  <p class="fs-6">Choose your product and pay securely</p>
+</div>
+
+<!-- Products Section -->
+<div class="container my-5">
+  <div class="row g-4 justify-content-center">
+    {% if product_list %} {% for i in product_list %}
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <!-- Product Card -->
+      <div class="card product-card shadow-sm rounded-4 border-0">
+        <!-- Image -->
+        <div class="position-relative" style="height: 220px">
+          <img
+            src="{{ i.images.url }}"
+            class="card-img-top img-fluid"
+            alt="{{ i.name }}"
+            style="
+              width: 50px 50px;
+              height: 220px;
+              object-fit: contain;
+              border-top-left-radius: 1rem;
+              border-top-right-radius: 1;
+            "
+          />
+          <span
+            class="badge bg-success position-absolute top-0 end-0 m-2 px-2 py-1 fw-semibold shadow-sm"
+          >
+            ₹{{ i.price }}
+          </span>
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body text-center">
+          <h6 class="card-title fw-semibold mb-2">{{ i.name }}</h6>
+          <p class="card-text text-muted small mb-3">
+            {{ i.description|truncatechars:50 }}
+          </p>
+          <a
+            href="{% url 'checkout' i.id %}"
+            class="btn btn-primary btn-sm rounded-pill fw-semibold px-3 shadow-sm"
+          >
+            Buy Now
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <p class="text-center text-muted fs-5">
+      No products available at the moment.
+    </p>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  body {
+    background: linear-gradient(120deg, #f0f4ff, #d9e8ff);
+    font-family: "Segoe UI", sans-serif;
+  }
+
+  /* Compact card */
+  .product-card {
+    transition: all 0.35s ease;
+    background: #fff;
+  }
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  }
+
+  /* Image zoom effect */
+  .product-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    transition: transform 0.4s ease;
+  }
+  .product-card:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Button gradient animation */
+  .btn-primary {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border: none;
+    transition: all 0.3s ease;
+  }
+  .btn-primary:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0.6rem 1.2rem rgba(102, 126, 234, 0.4);
+  }
+
+  /* Badge */
+  .badge {
+    font-size: 0.8rem;
+    border-radius: 0.6rem;
+  }
+</style>
+
+{% endblock %}

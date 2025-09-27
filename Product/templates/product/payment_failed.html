@@ -1,0 +1,9 @@
+{% extends 'product/base.html' %} {% block content %}
+<div class="container mx-auto text-center p-6">
+  <h2 class="text-3xl font-bold text-red-600">Payment Failed ❌</h2>
+  <p class="mt-4 text-lg">Something went wrong. Please try again.</p>
+  <a href="{% url 'product_list' %}" class="btn btn-primary mt-6"
+    >Back to Products</a
+  >
+</div>
+{% endblock %}
